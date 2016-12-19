@@ -37,14 +37,13 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String from_station = intent.getStringExtra("from_station");
         String to_station = intent.getStringExtra("to_station");
-        //String date = intent.getStringExtra("date");
-        String date = "31.12.2016";
+        String date = intent.getStringExtra("date");
         Log.d("res", from_station + ":" + to_station + ":" + date);
         new ConnTask().execute(from_station, to_station, date);
     }
 
 
-    class ConnTask extends AsyncTask<String, String, String> {
+    class ConnTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -78,7 +77,6 @@ public class ResultActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Log.d("res", responseString.toString() + " >>>>");
             return responseString;
         }
 
@@ -89,7 +87,24 @@ public class ResultActivity extends AppCompatActivity {
 
             try {
                 JSONObject jObj = new JSONObject(json);
-
+                JSONArray res = jObj.getJSONArray("res");
+                JSONObject fir = res.getJSONObject(0);
+                String fromStat = fir.getString("from_station");
+                String toStat = fir.getString("to_station");
+                String day = fir.getString("date");
+                if(res.length() < 2){
+                    // No trains available or wrong input
+                }
+                for(int i = 1; i < res.length(); i++){
+                    JSONObject train = res.getJSONObject(i);
+                    String path = train.getString("path");
+                    String time_from = train.getString("time_from");
+                    String time_to = train.getString("time_to");
+                    String price_second = train.getString("price_second");
+                    String price_compartment = train.getString("price_compartment");
+                    String price_luxury = train.getString("price_luxury");
+                    Log.d("res", "after parse:::::>>>>> " + path + " : " + time_from + " : " + time_to);
+                }
                 //Log.d("formings", jObj.getString("result"));
                 //tv.setText(jObj.getString("result"));
                 //usr.setText("");
@@ -97,7 +112,6 @@ public class ResultActivity extends AppCompatActivity {
             } catch (JSONException e1) {
                 e1.printStackTrace();
             }
-            return;
         }
     }
 }
