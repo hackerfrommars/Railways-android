@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 /**
  * Created by aisha on 12/19/16.
  */
-public class FirstFragment extends android.support.v4.app.Fragment {
+public class FirstFragment extends Fragment {
 
     View myView;
 
