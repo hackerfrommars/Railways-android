@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -217,10 +218,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_one) {
+            fragmentManager.beginTransaction().replace(R.id.frame, new FirstFragment());
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_two) {
+            fragmentManager.beginTransaction().replace(R.id.frame, new SecondFragment());
 
 
         }
