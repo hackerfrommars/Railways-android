@@ -5,6 +5,12 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
+import android.widget.SimpleExpandableListAdapter;
+import android.widget.TextView;
 
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.impl.client.BasicResponseHandler;
@@ -13,8 +19,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -29,7 +38,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 public class ResultActivity extends AppCompatActivity {
+    ProgressBar progressBar;
+    TextView result;
+    ExpandableListView elv;
+    SimpleExpandableListAdapter sa;
 
+    ArrayList<ArrayList<HashMap<String, String>>> childData;
+    ArrayList<HashMap<String, String>> groupData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +54,14 @@ public class ResultActivity extends AppCompatActivity {
         String to_station = intent.getStringExtra("to_station");
         String date = intent.getStringExtra("date");
         Log.d("res", from_station + ":" + to_station + ":" + date);
+
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        result = (TextView)findViewById(R.id.result);
+        result.setVisibility(View.INVISIBLE);
+        elv = (ExpandableListView)findViewById(R.id.lvExp);
+
         new ConnTask().execute(from_station, to_station, date);
+
     }
 
 
@@ -83,8 +105,7 @@ public class ResultActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String json) {
             super.onPostExecute(json);
-//            pb.setVisibility(View.GONE);
-
+            progressBar.setVisibility(View.GONE);
             try {
                 JSONObject jObj = new JSONObject(json);
                 JSONArray res = jObj.getJSONArray("res");
@@ -93,25 +114,71 @@ public class ResultActivity extends AppCompatActivity {
                 String toStat = fir.getString("to_station");
                 String day = fir.getString("date");
                 if(res.length() < 2){
-                    // No trains available or wrong input
+                    result.setVisibility(View.VISIBLE);
+                    result.setText("No trains are available at this day");
                 }
-                for(int i = 1; i < res.length(); i++){
-                    JSONObject train = res.getJSONObject(i);
-                    String path = train.getString("path");
-                    String time_from = train.getString("time_from");
-                    String time_to = train.getString("time_to");
-                    String price_second = train.getString("price_second");
-                    String price_compartment = train.getString("price_compartment");
-                    String price_luxury = train.getString("price_luxury");
-                    Log.d("res", "after parse:::::>>>>> " + path + " : " + time_from + " : " + time_to);
+                else {
+                    ArrayList<HashMap<String, String>> result_group =
+                            new ArrayList();
+                    ArrayList<ArrayList<HashMap<String, String>>> result_item =
+                            new ArrayList();
+                    for (int i = 1; i < res.length(); i++) {
+                        JSONObject train = res.getJSONObject(i);
+                        String path = train.getString("path");
+                        String time_from = train.getString("time_from");
+                        String time_to = train.getString("time_to");
+                        String price_second = train.getString("price_second");
+                        String price_compartment = train.getString("price_compartment");
+                        String price_luxury = train.getString("price_luxury");
+
+                        Log.d("res", "after parse:::::>>>>> " + path + " : " + time_from + " : " + time_to);
+
+
+                        HashMap<String, String> groupmap = new HashMap();
+                        groupmap.put("train", "train");
+                        groupmap.put("route", path);
+                        result_group.add(groupmap);
+
+                        ArrayList<HashMap<String, String>> itemList = new ArrayList();
+                        HashMap<String, String> timeFromMap = new HashMap();
+                        timeFromMap.put("keyitem", "Time");
+                        timeFromMap.put("valueitem", time_from);
+                        itemList.add(timeFromMap);
+
+                        HashMap<String, String> timeToMap = new HashMap();
+                        timeToMap.put("keyitem", "Time");
+                        timeToMap.put("valueitem", time_to);
+                        itemList.add(timeToMap);
+
+                        HashMap<String, String> priceSecondMap = new HashMap();
+                        priceSecondMap.put("keyitem", "Price second");
+                        priceSecondMap.put("valueitem", price_second);
+                        itemList.add(priceSecondMap);
+
+                        HashMap<String, String> priceCompartmentMap = new HashMap();
+                        priceCompartmentMap.put("keyitem", "Price compartment");
+                        priceCompartmentMap.put("valueitem", price_compartment);
+                        itemList.add(priceCompartmentMap);
+
+                        HashMap<String, String> priceLuxuryMap = new HashMap();
+                        priceLuxuryMap.put("keyitem", "Price luxury");
+                        priceLuxuryMap.put("valueitem", price_luxury);
+                        itemList.add(priceLuxuryMap);
+
+                        result_item.add(itemList);
+                    }
+                    groupData = result_group;
+                    childData = result_item;
+
                 }
-                //Log.d("formings", jObj.getString("result"));
-                //tv.setText(jObj.getString("result"));
-                //usr.setText("");
-                //pass.setText("");
             } catch (JSONException e1) {
                 e1.printStackTrace();
             }
+            sa = new SimpleExpandableListAdapter(ResultActivity.this , groupData, R.layout.list_group,
+                    new String[]{"train", "route"}, new int[]{R.id.train, R.id.route},
+                    childData, R.layout.list_item, new String[]{"keyitem", "valueitem"},
+                    new int[]{R.id.keyitem, R.id.valueitem});
+            elv.setAdapter(sa);
         }
     }
 }
