@@ -23,7 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-<EditText
+<AutoCompleteTextView
     android:id="@+id/fromStation"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
@@ -31,11 +31,13 @@
     android:textColor="#020000"
     android:textSize="20dp"
     android:ems="9"
+    android:width="250sp"
     android:layout_above="@+id/iv2"
     android:layout_toRightOf="@+id/iv"
     android:layout_toEndOf="@+id/iv"
     android:layout_marginLeft="30dp"
     android:layout_marginStart="30dp" />
+
     <ImageView
         android:src="@drawable/to"
         android:layout_width="wrap_content"
@@ -45,7 +47,8 @@
         android:layout_below="@+id/iv"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-    <EditText
+    <AutoCompleteTextView
+        android:width="250sp"
         android:id="@+id/toStation"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -88,8 +91,9 @@
         android:id="@+id/date"
         android:hint="ДД.ММ.ГГГГ"
         android:layout_alignBottom="@+id/imageView"
-        android:layout_alignRight="@+id/toStation"
-        android:layout_alignEnd="@+id/toStation" />
+        android:layout_alignLeft="@+id/toStation"
+        android:layout_alignStart="@+id/toStation" />
+
 
 
 </RelativeLayout>

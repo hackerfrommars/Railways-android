@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity
         search_btn = (Button) findViewById(R.id.search);
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, station_name);
-        AutoCompleteTextView textView = (AutoCompleteTextView)
-                findViewById(R.id.autoCompleteTextView);
-        textView.setAdapter(adapter);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+  //              android.R.layout.simple_dropdown_item_1line, station_name);
+    //   AutoCompleteTextView textView = (AutoCompleteTextView)
+     //           findViewById(R.id.autoCompleteTextView);
+       // textView.setAdapter(adapter);
 
 
 
