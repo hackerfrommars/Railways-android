@@ -3,19 +3,25 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@color/colorPrimary"
+    >
 
     <TextView
         android:id="@+id/train"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textSize="17dp"/>
+        android:textSize="17dp"
+        android:textColor="#ffffff"
+        />
     <TextView
         android:id="@+id/route"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:textColor="#ffffff"
+        />
 
 </LinearLayout>

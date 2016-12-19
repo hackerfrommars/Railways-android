@@ -135,23 +135,23 @@ public class ResultActivity extends AppCompatActivity {
 
 
                         HashMap<String, String> groupmap = new HashMap();
-                        groupmap.put("train", "train");
+                        groupmap.put("train", "Train");
                         groupmap.put("route", path);
                         result_group.add(groupmap);
 
                         ArrayList<HashMap<String, String>> itemList = new ArrayList();
                         HashMap<String, String> timeFromMap = new HashMap();
-                        timeFromMap.put("keyitem", "Time");
+                        timeFromMap.put("keyitem", "Departure Time");
                         timeFromMap.put("valueitem", time_from);
                         itemList.add(timeFromMap);
 
                         HashMap<String, String> timeToMap = new HashMap();
-                        timeToMap.put("keyitem", "Time");
+                        timeToMap.put("keyitem", "Arrival Time");
                         timeToMap.put("valueitem", time_to);
                         itemList.add(timeToMap);
 
                         HashMap<String, String> priceSecondMap = new HashMap();
-                        priceSecondMap.put("keyitem", "Price second");
+                        priceSecondMap.put("keyitem", "Price second class");
                         priceSecondMap.put("valueitem", price_second);
                         itemList.add(priceSecondMap);
 

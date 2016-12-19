@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.aisha.project.MainActivity"
     tools:showIn="@layout/app_bar_main"
-    android:background="#e6e6e6">
+    >
 
     <ImageView
         android:src="@drawable/from"
@@ -78,6 +78,7 @@
         android:width="400dp"
         android:background="#8d5cf6"
         android:height="30dp"
+        android:textColor="#ffffff"
         android:layout_below="@+id/date"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -87,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="date"
-        android:ems="10"
+        android:ems="12"
         android:id="@+id/date"
         android:hint="ДД.ММ.ГГГГ"
         android:layout_alignBottom="@+id/imageView"
