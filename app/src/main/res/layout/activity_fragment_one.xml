@@ -11,7 +11,7 @@
     tools:context="com.example.aisha.project.FragmentOneActivity">
 
     <TextView
-        android:text="TextView"
+        android:text="Как купить ЖД-билеты КТЖ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

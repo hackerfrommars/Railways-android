@@ -10,4 +10,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.aisha.project.FragmentTwoActivity">
 
+    <TextView
+        android:text="Как купить ЖД-билеты КТЖ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ktzh"
+        android:textColor="#000000"
+
+        android:textSize="30sp"/>
+    <TextView
+        android:text="Приложение RailwayTickets позволяет покупать железнодорожные билеты практически по всем направлениям Казахстана. После выбора маршрута, необходимо выбрать места в вагоне, ввести информацию о пассажирах и покупателеба затем оплатить картами VISA или MasterCard. На электронную почту будет отправлен билет для распечатки, а также номер , введя который в терминале на вокзалах, можно распечатать билет на бланке КТЖ."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ktzh"
+        android:textSize="19sp"
+        android:id="@+id/txt"/>
+    <TextView
+        android:layout_below="@+id/txt"
+        android:text="Как воспользоваться онлайн билетом на поезд"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="30sp"
+        android:textColor="#000000"
+        android:id="@+id/txt1"/>
+    <TextView
+        android:layout_below="@+id/txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19sp"
+        android:text="Железнодорожные билеты, оплаченные посредством сайта,можно получить только на территории Республики Казахстан в билетных кассах Казахстан Темиржолы, а также через терминалы самообслуживания, размещенные на железнодорожных вокзалах."/>
 </RelativeLayout>
