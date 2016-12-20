@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_one) {
             fragmentManager.beginTransaction().replace(R.id.frame, new FirstFragment());
             Log.d("isClicked", "first");
-            Intent intent = new Intent(MainActivity.this, FragmentOneActivity.class);
+            Intent intent = new Intent(MainActivity.this, FragmentTwoActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_two) {
             fragmentManager.beginTransaction().replace(R.id.frame, new SecondFragment());
